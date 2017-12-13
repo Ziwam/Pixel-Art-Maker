@@ -1,39 +1,25 @@
-// Select color input
-// Select size input
+let color = document.getElementById("colorPicker");
 
-// When size is submitted by the user, call makeGrid()
+$('#sizePicker').submit(makeGrid);
 
-let color;
+function makeGrid(event) {
+	event.preventDefault();
 
-function getColor(){
-	color = $('#colorPicker').val();
-	console.log(color);
-}
-
-$('#sizePicker').submit(function makeGrid(ev) {
-	ev.preventDefault();
-// Your code goes here!
-	let canvas, ht, wd;
-	canvas = $('#pixel_canvas');
-	ht = $('#input_height').val();
-	wd = $('#input_width').val();
-	getColor();
+	let canvas = $('#pixel_canvas');
+	let height = $('#input_height').val();
+	let width = $('#input_width').val();
 
 	canvas.empty();
 
-	for (let i = 0; i < ht; i++) {
-		const trr = $("<tr></tr>");
-		canvas.append(trr);
-		for (let i = 0; i < wd; i++) {
-			const tdd = $("<td bgcolor=\"#ffffff\"></td>");
-			trr.append(tdd);
-			tdd.on('click',function(){
-				$(this).attr('bgcolor',color);
+	for (let i = 0; i < height; i++) {
+		const row = $("<tr></tr>");
+		canvas.append(row);
+		for (let j = 0; j < width; j++) {
+			const cell = $("<td bgcolor=\"#ffffff\"></td>");
+			row.append(cell);
+			cell.on('click',function(){
+				$(this).attr('bgcolor',color.value);
 			});
 		}
 	}
-});
-
-$('#colorPicker').change(function(){
-	color = $('#colorPicker').val();
-});
+}
